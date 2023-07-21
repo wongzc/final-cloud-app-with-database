@@ -144,6 +144,7 @@ def extract_answers(request):
 def show_exam_result(request, course_id, submission_id):
     course = get_object_or_404(Course, id=course_id)
     submission = get_object_or_404(Submission, id=submission_id)
+    choices = submission.choices.all()
 
     selected_ids = list(submission.choices.values_list('id', flat=True))
     total_score = 0
@@ -156,7 +157,11 @@ def show_exam_result(request, course_id, submission_id):
         'course': course,
         'selected_ids': selected_ids,
         'grade': total_score,
-        'exam_results': [(question, question.is_get_score(selected_ids)) for question in course.question_set.all()],
+        'choices':choices,
+        'exam_results': [
+            (question, 
+        question.is_get_score(selected_ids)
+        ) for question in course.question_set.all()],
     }
 
     return render(request, 'onlinecourse/exam_result_bootstrap.html', context)
