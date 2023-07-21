@@ -68,7 +68,7 @@
                     {% endif %}
                     {% else %}
                     {% if choice in choices %}
-                    <p class="card-text text-success">Wrong answer: {{choice.choice_text}}</p>
+                    <p class="card-text text-danger">Wrong answer: {{choice.choice_text}}</p>
                     {% else %}
                     <p class="card-text">{{choice.choice_text}}</p>
                     {% endif %}
